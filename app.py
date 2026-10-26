@@ -217,6 +217,8 @@ elif scelta_pagina == "📖 Preghiere":
         
         if scelta_preghiera == "Visualizza Tutte":
             for item_id, titolo, testo, img_path in preghiere:
+                if img_path:
+                    img_path = img_path.replace('\\', '/')
                 with st.expander(titolo):
                     if img_path and os.path.exists(img_path):
                         img = Image.open(img_path)
@@ -225,6 +227,8 @@ elif scelta_pagina == "📖 Preghiere":
         else:
             for item_id, titolo, testo, img_path in preghiere:
                 if titolo == scelta_preghiera:
+                    if img_path:
+                        img_path = img_path.replace('\\', '/')
                     st.subheader(titolo)
                     if img_path and os.path.exists(img_path):
                         img = Image.open(img_path)
@@ -249,6 +253,8 @@ elif scelta_pagina == "📚 Racconti":
         
         if scelta_racconto == "Visualizza Tutti":
             for item_id, titolo, testo, img_path in racconti:
+                if img_path:
+                    img_path = img_path.replace('\\', '/')
                 st.subheader(titolo)
                 if img_path and os.path.exists(img_path):
                     img = Image.open(img_path)
@@ -258,6 +264,8 @@ elif scelta_pagina == "📚 Racconti":
         else:
             for item_id, titolo, testo, img_path in racconti:
                 if titolo == scelta_racconto:
+                    if img_path:
+                        img_path = img_path.replace('\\', '/')
                     st.subheader(titolo)
                     if img_path and os.path.exists(img_path):
                         img = Image.open(img_path)
@@ -382,9 +390,10 @@ elif scelta_pagina == "⚙️ Area Gestione (Carica/Modifica)":
                         nuovo_titolo = st.text_input("Modifica Titolo", value=current_title)
                         nuovo_testo = st.text_area("Modifica Testo", value=current_text)
                         
-                        st.write(f"Immagine attuale: `{current_img if current_img else 'Nessuna'}`")
-                        if current_img and os.path.exists(current_img):
-                            st.image(current_img, width=150)
+                        img_mostra = current_img.replace('\\', '/') if current_img else ''
+                        st.write(f"Immagine attuale: `{img_mostra if img_mostra else 'Nessuna'}`")
+                        if img_mostra and os.path.exists(img_mostra):
+                            st.image(img_mostra, width=150)
                         
                         nuova_immagine_file = st.file_uploader("Sostituisci immagine (lascia vuoto per non cambiare)", type=["jpg", "jpeg", "png", "jfif", "webp", "bmp"])
                         rimuovi_img = st.checkbox("Elimina immagine esistente")
@@ -429,9 +438,10 @@ elif scelta_pagina == "⚙️ Area Gestione (Carica/Modifica)":
                         nuovo_titolo = st.text_input("Modifica Titolo", value=current_title)
                         nuovo_testo = st.text_area("Modifica Testo", value=current_text)
                         
-                        st.write(f"Immagine attuale: `{current_img if current_img else 'Nessuna'}`")
-                        if current_img and os.path.exists(current_img):
-                            st.image(current_img, width=150)
+                        img_mostra = current_img.replace('\\', '/') if current_img else ''
+                        st.write(f"Immagine attuale: `{img_mostra if img_mostra else 'Nessuna'}`")
+                        if img_mostra and os.path.exists(img_mostra):
+                            st.image(img_mostra, width=150)
                         
                         nuova_immagine_file = st.file_uploader("Sostituisci immagine (lascia vuoto per non cambiare)", type=["jpg", "jpeg", "png", "jfif", "webp", "bmp"])
                         rimuovi_img = st.checkbox("Elimina immagine esistente")
